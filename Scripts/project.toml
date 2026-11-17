@@ -8,6 +8,23 @@ build_dir = "build"
 build_type = "RelWithDebInfo"
 install_root = "~/.local"
 
+# python3 Scripts/rpm.py publish: the package for an RPM repository (see rpm.py's docstring). Its own build
+# directory, so the development build (prefix ~/.local) is left alone.
+[rpm]
+name = "kurodlg"
+summary = "Dialogs for shell scripts and Dolphin service menus"
+description = "A progress window with a details area or a Plasma job, a multi-field form with presets, a window for a command's output, and notifications - in Kirigami, for shell scripts and Dolphin service menus."
+license = "GPL-3.0-or-later"
+url = "https://github.com/Istarlabs/kurodlg"
+version_file = "CMakeLists.txt"
+build = [
+    "cmake -S . -B build/rpm -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTING=OFF",
+    "cmake --build build/rpm",
+    "DESTDIR={stage} cmake --install build/rpm",
+]
+# What QML loads at run time, which rpmbuild cannot see as linked libraries.
+requires = ["kf6-kirigami", "kf6-kirigami-addons", "kf6-qqc2-desktop-style", "qt6-qtdeclarative"]
+
 # A KDE program translates through gettext, and the English text is the i18n() argument itself.
 [i18n]
 domain = "kurodlg"
