@@ -1,0 +1,21 @@
+# What this project differs by. Everything else lives in devscripts (https://github.com/Istarlabs/devscripts).
+name = "kurodlg"
+env_prefix = "KURODLG"
+
+[cpp]
+binary = "kurodlg"
+build_dir = "build"
+build_type = "RelWithDebInfo"
+install_root = "~/.local"
+
+# A KDE program translates through gettext, and the English text is the i18n() argument itself.
+[i18n]
+domain = "kurodlg"
+languages = ["de"]
+
+[spdx]
+holder = "Pascal Klose"
+licence = "GPL-3.0-or-later"
+
+[repo]
+main_branch = "master"

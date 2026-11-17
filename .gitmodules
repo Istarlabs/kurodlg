@@ -1,0 +1,3 @@
+[submodule ".devscripts"]
+	path = .devscripts
+	url = https://github.com/Istarlabs/devscripts.git

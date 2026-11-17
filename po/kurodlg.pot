@@ -1,0 +1,307 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Pascal Klose
+# This file is distributed under the same license as the kurodlg package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: kurodlg\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-08 00:53+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/fieldspec.cpp:88
+#, kde-format
+msgid "Field \"%1\": expected NAME:TYPE:Label[:Default[:Extra]]"
+msgstr ""
+
+#: src/fieldspec.cpp:97
+#, kde-format
+msgid ""
+"Field \"%1\": unknown type \"%2\". Known: text, pass, int, check, combo, "
+"file, dir, date"
+msgstr ""
+
+#: src/fieldspec.cpp:104
+#, kde-format
+msgid ""
+"Field \"%1\": the name may not be empty, it is what the value is printed "
+"under"
+msgstr ""
+
+#: src/fieldspec.cpp:122
+#, kde-format
+msgid "Field \"%1\": a combo needs its choices as Default, separated by \"|\""
+msgstr ""
+
+#: src/fieldspec.cpp:152
+#, kde-format
+msgid "Field \"%1\": the range must read MIN-MAX, for example 10-51"
+msgstr ""
+
+#: src/main.cpp:120
+#, kde-format
+msgid "Cannot load the %1 window: %2"
+msgstr ""
+
+#: src/main.cpp:155
+#, kde-format
+msgid "--form needs at least one --field NAME:TYPE:Label[:Default[:Extra]]"
+msgstr ""
+
+#: src/main.cpp:229
+#, kde-format
+msgid "Cannot read \"%1\": %2"
+msgstr ""
+
+#: src/main.cpp:300
+#, kde-format
+msgid "Cannot register \"%1\" on the session bus"
+msgstr ""
+
+#: src/main.cpp:362
+#, kde-format
+msgid "--passivepopup takes its timeout in seconds, for example 5"
+msgstr ""
+
+#: src/main.cpp:406
+#, kde-format
+msgid "Cannot start the progress dialog"
+msgstr ""
+
+#: src/main.cpp:429
+#, kde-format
+msgid "The progress dialog did not come up on the session bus"
+msgstr ""
+
+#: src/main.cpp:449
+#, kde-format
+msgid "kurodlg"
+msgstr ""
+
+#: src/main.cpp:450
+#, kde-format
+msgid ""
+"Dialogs for shell scripts and service menus: a progress window with a "
+"details area, a multi-field form, a window that shows a command's output, "
+"and notifications."
+msgstr ""
+
+#: src/main.cpp:452
+#, kde-format
+msgid "© 2026 Pascal Klose"
+msgstr ""
+
+#: src/main.cpp:453
+#, kde-format
+msgid "Pascal Klose"
+msgstr ""
+
+#: src/main.cpp:469
+#, kde-format
+msgid ""
+"Show a progress window and print \"<service> <path>\" to drive it over D-Bus."
+msgstr ""
+
+#: src/main.cpp:470 src/main.cpp:471 src/main.cpp:477 src/main.cpp:479
+#: src/main.cpp:480 src/main.cpp:489
+#, kde-format
+msgid "text"
+msgstr ""
+
+#: src/main.cpp:471
+#, kde-format
+msgid "Show a form built from the --field arguments."
+msgstr ""
+
+#: src/main.cpp:472
+#, kde-format
+msgid "A form field, NAME:TYPE:Label[:Default[:Extra]]. Repeatable."
+msgstr ""
+
+#: src/main.cpp:472 src/main.cpp:476
+#, kde-format
+msgid "spec"
+msgstr ""
+
+#: src/main.cpp:474
+#, kde-format
+msgid ""
+"Picking CHOICE in the combo FIELD sets the named fields, "
+"FIELD:CHOICE:NAME=VALUE[:NAME=VALUE...]. Repeatable."
+msgstr ""
+
+#: src/main.cpp:477
+#, kde-format
+msgid "Show a window with the text arriving on stdin."
+msgstr ""
+
+#: src/main.cpp:478
+#, kde-format
+msgid "Read --textbox content from this file instead of stdin."
+msgstr ""
+
+#: src/main.cpp:478
+#, kde-format
+msgid "path"
+msgstr ""
+
+#: src/main.cpp:479
+#, kde-format
+msgid "Window title."
+msgstr ""
+
+#: src/main.cpp:480
+#, kde-format
+msgid "A heading shown inside the dialog, above the label."
+msgstr ""
+
+#: src/main.cpp:481
+#, kde-format
+msgid "Window icon, by icon theme name."
+msgstr ""
+
+#: src/main.cpp:481 src/main.cpp:485
+#, kde-format
+msgid "name"
+msgstr ""
+
+#: src/main.cpp:482
+#, kde-format
+msgid "Window size, for example 640x420."
+msgstr ""
+
+#: src/main.cpp:482
+#, kde-format
+msgid "WxH"
+msgstr ""
+
+#: src/main.cpp:483
+#, kde-format
+msgid "Start with the details area expanded."
+msgstr ""
+
+#: src/main.cpp:484
+#, kde-format
+msgid ""
+"Show the progress on this desktop entry's task icon instead of kurodlg's."
+msgstr ""
+
+#: src/main.cpp:486
+#, kde-format
+msgid ""
+"Show the About page: version, authors, licence and where to report bugs."
+msgstr ""
+
+#: src/main.cpp:487
+#, kde-format
+msgid ""
+"With --progress: no window, show the progress as a Plasma job notification "
+"instead."
+msgstr ""
+
+#: src/main.cpp:489
+#, kde-format
+msgid ""
+"Show a notification with this text; an optional TIMEOUT in seconds closes it "
+"earlier."
+msgstr ""
+
+#: src/main.cpp:499
+#, kde-format
+msgid ""
+"With --progress: the steps the bar counts to, default 100. With --"
+"passivepopup: the timeout."
+msgstr ""
+
+#: src/main.cpp:513
+#, kde-format
+msgid "--size takes WIDTHxHEIGHT, for example 640x420"
+msgstr ""
+
+#: src/presetspec.cpp:21
+#, kde-format
+msgid "Preset \"%1\": expected FIELD:CHOICE:NAME=VALUE[:NAME=VALUE...]"
+msgstr ""
+
+#: src/presetspec.cpp:33
+#, kde-format
+msgid "Preset \"%1\": \"%2\" is not NAME=VALUE"
+msgstr ""
+
+#: src/presetspec.cpp:97
+#, kde-format
+msgid "Preset for \"%1\": there is no combo field of that name"
+msgstr ""
+
+#: src/presetspec.cpp:103
+#, kde-format
+msgid "Preset for \"%1\": \"%2\" is not one of its choices"
+msgstr ""
+
+#: src/presetspec.cpp:113
+#, kde-format
+msgid "Preset \"%1\": there is no other field named \"%2\""
+msgstr ""
+
+#: src/presetspec.cpp:121
+#, kde-format
+msgid "Preset \"%1\": \"%2\" cannot take \"%3\""
+msgstr ""
+
+#: src/qml/AboutWindow.qml:12
+#, kde-format
+msgid "About kurodlg"
+msgstr ""
+
+#: src/qml/FormWindow.qml:163
+#, kde-format
+msgid "Browse…"
+msgstr ""
+
+#: src/qml/ProgressWindow.qml:66
+#, kde-format
+msgid "Details"
+msgstr ""
+
+#: src/qml/ProgressWindow.qml:108
+#, kde-format
+msgid "Copied"
+msgstr ""
+
+#: src/qml/ProgressWindow.qml:108
+#, kde-format
+msgid "Copy"
+msgstr ""
+
+#: src/qml/ProgressWindow.qml:109
+#, kde-format
+msgid "Copy the whole output to the clipboard"
+msgstr ""
+
+#: src/qml/ProgressWindow.qml:138
+#, kde-format
+msgid "Close"
+msgstr ""
+
+#: src/qml/ProgressWindow.qml:142
+#, kde-format
+msgid "Cancelling…"
+msgstr ""
+
+#: src/qml/ProgressWindow.qml:145
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: src/qml/ProgressWindow.qml:145
+#, kde-format
+msgid "Stop"
+msgstr ""

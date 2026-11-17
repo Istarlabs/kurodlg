@@ -1,0 +1,31 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "d=\"${DEVSCRIPTS:-$HOME/dev/tools/devscripts}\"; [ -d \"$d/hooks\" ] || d=\"$CLAUDE_PROJECT_DIR/.devscripts\"; bash \"$d/hooks/no-cd-into-repo-root.sh\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "d=\"${DEVSCRIPTS:-$HOME/dev/tools/devscripts}\"; [ -d \"$d/hooks\" ] || d=\"$CLAUDE_PROJECT_DIR/.devscripts\"; bash \"$d/hooks/prefer-repo-scripts.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "d=\"${DEVSCRIPTS:-$HOME/dev/tools/devscripts}\"; [ -d \"$d/hooks\" ] || d=\"$CLAUDE_PROJECT_DIR/.devscripts\"; bash \"$d/hooks/no-decorative-comments.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

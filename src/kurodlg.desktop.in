@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=kurodlg
+Comment=Dialogs for shell scripts and service menus
+Comment[de]=Dialoge für Shell-Skripte und Servicemenüs
+Exec=@KDE_INSTALL_FULL_BINDIR@/kurodlg
+Icon=dialog-information
+Terminal=false
+NoDisplay=true
+Categories=Qt;KDE;Utility;

@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2026 Pascal Klose
+# SPDX-License-Identifier: MIT
+
+# Without this file the IDE runs its own default set, which includes checks that are simply wrong
+# for a Qt/KDE program - the disabled ones below each cost more to obey than to ignore.
+Checks: >
+  bugprone-*,
+  cppcoreguidelines-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+
+  -bugprone-easily-swappable-parameters,
+  -bugprone-suspicious-include,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-prefer-member-initializer,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-type-static-cast-downcast,
+  -misc-include-cleaner,
+  -modernize-raw-string-literal,
+  -modernize-use-trailing-return-type,
+  -performance-enum-size,
+  -readability-identifier-length,
+  -readability-implicit-bool-conversion,
+  -readability-magic-numbers,
+  -readability-make-member-function-const,
+  -readability-redundant-access-specifiers,
+
+# The generated sources - moc_*.cpp and the D-Bus adaptor - are not ours to fix, and moc alone
+# accounts for more warnings than the whole of src/.
+HeaderFilterRegex: 'src/[^/]+\.h$'
+
+# Why each of the above is off:
+#
+#   easily-swappable-parameters        (int *minimum, int *maximum) is the clearest signature there
+#                                      is; the check wants a struct for every pair.
+#   suspicious-include                 #include "moc_foo.cpp" at the end of the .cpp is the Qt
+#                                      idiom, not an accident.
+#   owning-memory                      every widget is `new`ed and owned by its parent. The check
+#                                      wants gsl::owner on all of it.
+#   prefer-member-initializer          the child widgets are built in the constructor body because
+#                                      the order they are added to the layout is the order they
+#                                      appear in; an initialiser list would scatter that.
+#   pro-bounds-*                       C arrays and pointer arithmetic at the ::read() boundary.
+#   pro-type-static-cast-downcast      this is the qMax/dynamic_cast trap: inside an event filter
+#                                      the event->type() check has already proved the type, and the
+#                                      check's advice - dynamic_cast - is both slower and *less*
+#                                      safe, because its null result is what nobody tests for.
+#   include-cleaner                    Qt's umbrella headers (<QDialog> pulling in QString, QList,
+#                                      ...) make this fire on nearly every line.
+#   raw-string-literal                 the escaped quotes it objects to are inside i18n(), and the
+#                                      translation extractor reads plain string literals.
+#   enum-size                          two enums with nine values each; the byte is not the point.
+#   magic-numbers                      the numbers are window sizes in a constructor.
+#   make-member-function-const         this is the other trap: a setter that only touches a child
+#                                      widget through a pointer *can* be const, and marking it so
+#                                      claims setLabelText() does not change the dialog. It does.
+#   redundant-access-specifiers        `public Q_SLOTS:` after `public:` is meaningful to moc.

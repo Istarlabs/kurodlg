@@ -1,0 +1,49 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!--
+    SPDX-FileCopyrightText: 2026 Pascal Klose
+    SPDX-License-Identifier: GPL-3.0-or-later
+
+    The first four members and the three properties are kdialog's
+    org.kde.kdialog.ProgressDialog verbatim, so a caller written against kdialog keeps working
+    after swapping the interface name.
+-->
+<node>
+  <interface name="net.kurokyuu.kurodlg.ProgressDialog">
+    <property name="maximum" type="i" access="readwrite"/>
+    <property name="value" type="i" access="readwrite"/>
+    <property name="autoClose" type="b" access="readwrite"/>
+    <method name="setLabelText">
+      <arg type="s" name="label" direction="in"/>
+    </method>
+    <method name="showCancelButton">
+      <arg type="b" name="value" direction="in"/>
+    </method>
+    <method name="wasCancelled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="close"/>
+
+    <method name="setTitle">
+      <arg type="s" name="title" direction="in"/>
+    </method>
+    <method name="setHeader">
+      <arg type="s" name="header" direction="in"/>
+    </method>
+    <method name="resizeWindow">
+      <arg type="i" name="width" direction="in"/>
+      <arg type="i" name="height" direction="in"/>
+    </method>
+    <method name="appendDetail">
+      <arg type="s" name="text" direction="in"/>
+    </method>
+    <method name="clearDetails"/>
+    <method name="setDetailsVisible">
+      <arg type="b" name="visible" direction="in"/>
+    </method>
+    <method name="setProgressVisible">
+      <arg type="b" name="visible" direction="in"/>
+    </method>
+    <method name="setFinished"/>
+  </interface>
+</node>
