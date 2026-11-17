@@ -131,8 +131,6 @@ Closes #NNN
 ## Verified
 - `dotnet build` clean
 - <logic checks run, migration applied to dev DB (not committed)>
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
 
 - **Stacked PRs**: if the branch depends on an unmerged PR, base it on that branch and note
