@@ -38,6 +38,17 @@ ctest --test-dir build
 cmake --install build
 ```
 
+## RPM
+
+```bash
+python3 Scripts/rpm.py build       # ~/.cache/devscripts/rpm/kurodlg-<version>-<timestamp>.x86_64.rpm
+python3 Scripts/rpm.py publish     # the same, sent to an RPM repository over ssh
+```
+
+devscripts' `rpm.py` builds it from `[rpm]` in `Scripts/project.toml` (Release, prefix `/usr`, no tests, its own build
+directory `build/rpm`). `publish` needs a repository: `[rpm] repository = "host:path"` or `DEVSCRIPTS_RPM_REPOSITORY`.
+A build installed into `~/.local` before stays in front of the package on the `PATH`: `python3 Scripts/cpp.py uninstall`.
+
 ## Modes
 
 ### `--form` - several fields in one dialog
