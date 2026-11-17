@@ -21,7 +21,7 @@ Applies when the change is small, self-contained and needs no review to be under
 
 Never *assume* the waiver: do the work, then ask "master direkt oder Branch + PR?" and let the
 user pick. If they say master, commit and offer the push — don't re-argue the workflow. Anything
-touching entities, migrations, permissions or more than a couple of files goes the normal route.
+touching the data model, migrations, permissions or more than a couple of files goes the normal route.
 
 ## Everything on GitHub is written in English
 Issue titles and bodies, PR titles and bodies, **PR comments and review replies**, commit
@@ -48,7 +48,7 @@ a document). That is the cheapest possible moment for them to say "das gibt's sc
    - this repository — `python3 Scripts/find.py "concept" --text` for the concept and its synonyms,
      not just the exact name you'd pick
    - the shared libraries this repository references, in their own checkout
-   - the reusable-component and helper projects of this solution
+   - the reusable-component and helper projects or crates of this repository
    A generated inventory is a starting point, never the verdict — regenerate it, then still confirm
    in the source.
 2. **What is the nearest existing pattern?** Name the closest existing feature and follow its shape.
@@ -82,26 +82,33 @@ already exist, and what is the nearest existing pattern"*, not just *"find X"*.
 ## 3. Implement + commit
 - Conventional Commits, English: `feat(scope): summary (#NNN)` / `fix(scope): summary`.
 - One logical change per commit; `docs(skills): ...` for skill updates is normal.
-- **Never commit EF migrations** — the folder is git-ignored on purpose.
+- **.NET: never commit EF migrations** — the folder is git-ignored on purpose.
 
 ## 4. Verify — use the scripts, not ad-hoc command chains
 
-```bash
-python3 Scripts/dotnet.py verify          # build + tests + warnings on the lines you changed
-python3 Scripts/dotnet.py packages --vulnerable
-```
+The project's language script is the first choice for building, testing and checking - whatever
+`Scripts/` holds for it:
 
-**`Scripts/dotnet.py` is the first choice for anything dotnet** — build, warnings, tests, packages,
-project list, SDK info. Do not rebuild those out of `dotnet … | grep …`: the SDK output on this
-machine is **German**, so hand-written greps for `error`/`warning` silently miss things, and every
-unique command line costs a permission prompt. Counting warning lines that way hid a high-severity
-package advisory (`NU1903`, no file position, never matched `warning CS`) and inflated the warning
-count by counting each one once per referencing project.
+| Project | Verify | Dependencies |
+| --- | --- | --- |
+| .NET (also Godot with C#) | `python3 Scripts/dotnet.py verify` | `python3 Scripts/dotnet.py packages --vulnerable` |
+| Rust | `python3 Scripts/rust.py verify` | `python3 Scripts/rust.py packages` |
+| C++ / Qt / KDE | `python3 Scripts/cpp.py verify` | - |
+| PHP | `python3 Scripts/php.py verify` | - |
+| JavaScript / TypeScript | `python3 Scripts/web.py verify` | - |
+
+`verify` is the build without incremental shortcuts, the tests, the linters and formatters the
+language has, and the licence lines - each script says what it covers in `--help`. Do not rebuild
+any of that out of `<tool> … | grep …`: the tools on this machine speak **German**, so hand-written
+greps for `error`/`warning` silently miss things, and every unique command line costs a permission
+prompt. Counting warning lines that way once hid a high-severity package advisory (`NU1903`, no file
+position, never matched `warning CS`) and counted each warning once per referencing project.
 
 - The build must be clean. `verify` reports warnings on **changed lines**, which is the signal;
   pre-existing ones in the same file are listed separately and are not yours to fix.
-- New, changed or now-unused user-facing strings? `python3 Scripts/translations.py add|update|remove {Area}`
-  (see the `localization` skill) — never the three manual steps.
+- New, changed or now-unused user-facing strings go through the project's translation script, never
+  by hand: `Scripts/translations.py add|update|remove {Area}` for .NET resources (the `localization`
+  skill), `Scripts/i18n.py update` for gettext (the `i18n` skill).
 - **Never install browsers/Playwright** — the user tests the UI manually.
 - Non-trivial pure logic: leave a runnable check behind, mention the cases in the PR body.
 
@@ -113,8 +120,8 @@ wrong-shaped script costs every future use.
 
 A script that belongs to every project goes in the shared devscripts checkout rather than in one
 repository's `Scripts/`; a script about this project's domain stays here. Rules either way: absolute
-paths derived from its own location, values that cannot drift (force `DOTNET_CLI_UI_LANGUAGE=en`,
-read the project list from the `.sln`), refuse rather than half-apply, non-zero exit on failure.
+paths derived from its own location, values that cannot drift (force the tool's language to English,
+read the project list from the project file), refuse rather than half-apply, non-zero exit on failure.
 
 ## 5. Pull request
 `python3 Scripts/repo.py pr-create --title "feat(scope): summary" --file body.md` — body template:
@@ -123,15 +130,15 @@ read the project list from the `.sln`), refuse rather than half-apply, non-zero 
 Closes #NNN
 
 ## What
-- Bullet list: entities/repos/UI/localization touched, key decisions inline
+- Bullet list: what was touched (data model, logic, UI, translations, packaging), key decisions inline
 
 ## Skipped (per issue)        <- only if something was deliberately left out
 ...
 
 ## Verified
-- `dotnet build` clean
-- <logic checks run, migration applied to dev DB (not committed)>
+- `Scripts/<language>.py verify` clean
+- <logic checks run; for a .NET data change: migration applied to the dev database, not committed>
 ```
 
 - **Stacked PRs**: if the branch depends on an unmerged PR, base it on that branch and note
-  "**Stacked on #X** — merge that first, then re-target to master" at the top of the body.
+  "**Stacked on #X** — merge that first, then re-target to the main branch" at the top of the body.
