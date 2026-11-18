@@ -36,3 +36,25 @@ licence = "GPL-3.0-or-later"
 
 [repo]
 main_branch = "master"
+
+# Created by `repo.py init` and `repo.py labels`, next to the shared ones.
+
+[[repo.labels]]
+name = "area:form"
+color = "0e8a16"
+description = "Form dialogs: fields and presets"
+
+[[repo.labels]]
+name = "area:progress"
+color = "1d76db"
+description = "Progress dialogs and jobs"
+
+[[repo.labels]]
+name = "packaging"
+color = "fbca04"
+description = "Packages and installation"
+
+[[repo.labels]]
+name = "i18n"
+color = "bfdadc"
+description = "Translations and localization"
